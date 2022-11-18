@@ -1,0 +1,3 @@
+rootProject.name = 'jakarta-package-alignment-root'
+
+include 'jakarta-package-alignment'

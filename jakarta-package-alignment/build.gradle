@@ -1,0 +1,30 @@
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'groovy'
+apply plugin: 'com.palantir.external-publish-jar'
+apply plugin: 'com.palantir.external-publish-gradle-plugin'
+
+dependencies {
+    testImplementation gradleTestKit()
+    testImplementation 'com.netflix.nebula:nebula-test'
+
+    implementation 'org.apache.maven:maven-artifact'
+    implementation 'com.google.guava:guava'
+}
+
+pluginBundle {
+    website = 'https://github.com/palantir/jakarta-package-alignment'
+    vcsUrl = 'https://github.com/palantir/jakarta-package-alignment'
+    description = "Ensure Jakarta EE dependencies are at versions with the 'jakarta' namespace, or force them back to Java EE dependencies with the 'javax' namespace"
+    tags = ['versions']
+}
+
+gradlePlugin {
+    plugins {
+        jakartaPackageAlignmentPlugin {
+            id = 'com.palantir.jakarta-package-alignment'
+            implementationClass = 'com.palantir.gradle.jakartapackagealignment.JakartaPackageAlignmentPlugin'
+            displayName = 'Jakarta Package Alignment Plugin'
+        }
+    }
+}
+
