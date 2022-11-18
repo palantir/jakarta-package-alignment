@@ -1,5 +1,7 @@
 # jakarta-package-alignment
 
+foo
+
 jakarta-package-alignment is a gradle plugin that tries to enforce that projects
 which depend on a library from Jakarta EE use a version known to have
 updated namespaces to `jakarta`. If projects have a dependency on a Jakarta
