@@ -41,6 +41,6 @@ final class MavenCoordinate {
 
     @Override
     public String toString() {
-        return String.format("%s:%s:%s", groupId, artifactId, version);
+        return groupId + ":" + artifactId + ":" + version;
     }
 }
