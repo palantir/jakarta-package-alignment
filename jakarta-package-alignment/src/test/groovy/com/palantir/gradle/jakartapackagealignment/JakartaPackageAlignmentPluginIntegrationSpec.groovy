@@ -31,7 +31,6 @@ class JakartaPackageAlignmentPluginIntegrationSpec extends IntegrationSpec {
     private File versionsProps
 
     // borrowed from gcv
-    @CompileStatic
     protected File generateMavenRepo(String... graph) {
         DependencyGraph dependencyGraph = new DependencyGraph(graph)
         GradleDependencyGenerator generator = new GradleDependencyGenerator(
