@@ -1,3 +1,7 @@
+<p align="right">
+<a href="https://autorelease.general.dmz.palantir.tech/palantir/jakarta-package-alignment"><img src="https://img.shields.io/badge/Perform%20an-Autorelease-success.svg" alt="Autorelease"></a>
+</p>
+
 # jakarta-package-alignment
 
 jakarta-package-alignment is a gradle plugin that tries to enforce that projects
