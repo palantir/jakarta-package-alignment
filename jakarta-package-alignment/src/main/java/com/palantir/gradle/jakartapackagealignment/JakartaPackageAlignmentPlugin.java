@@ -33,6 +33,11 @@ public class JakartaPackageAlignmentPlugin implements Plugin<Project> {
                 configureAllConfigurationsForSourceSet(project, sourceSet);
             });
         });
+
+        project.getPluginManager().withPlugin("com.palantir.consistent-versions", _plugin -> {
+            // necessary to get g-c-v to write substituted dependencies to the versions.lock file
+            project.getConfigurations().getByName("unifiedClasspath", this::configureConfigurationForSubstitution);
+        });
     }
 
     private void configureAllConfigurationsForSourceSet(Project project, SourceSet sourceSet) {
