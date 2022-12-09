@@ -27,12 +27,12 @@ import org.gradle.api.tasks.SourceSetContainer;
 public class JakartaPackageAlignmentPlugin implements Plugin<Project> {
     @Override
     public final void apply(Project project) {
-        SourceSetContainer sourceSets = project.getExtensions().findByType(SourceSetContainer.class);
-        if (sourceSets != null) {
+        project.getPluginManager().withPlugin("java-base", _plugin -> {
+            SourceSetContainer sourceSets = project.getExtensions().getByType(SourceSetContainer.class);
             sourceSets.configureEach(sourceSet -> {
                 configureAllConfigurationsForSourceSet(project, sourceSet);
             });
-        }
+        });
     }
 
     private void configureAllConfigurationsForSourceSet(Project project, SourceSet sourceSet) {
