@@ -15,24 +15,55 @@
  */
 package com.palantir.gradle.jakartapackagealignment;
 
+import com.google.common.collect.ImmutableSet;
+import java.util.Set;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.component.ModuleComponentSelector;
+import org.gradle.api.tasks.SourceSet;
+import org.gradle.api.tasks.SourceSetContainer;
 
 public class JakartaPackageAlignmentPlugin implements Plugin<Project> {
     @Override
     public final void apply(Project project) {
-        project.getConfigurations().configureEach(configuration -> {
-            configuration.getResolutionStrategy().getDependencySubstitution().all(dep -> {
-                if (dep.getRequested() instanceof ModuleComponentSelector) {
-                    ModuleComponentSelector selector = (ModuleComponentSelector) dep.getRequested();
-                    VersionMappings.getReplacement(selector)
-                            .ifPresent(replacement -> dep.useTarget(
-                                    replacement,
-                                    "forced to Java EE 8 dependency because the requested Jakarta "
-                                            + "dependency is < Jakarta EE 9"));
-                }
+        project.getPluginManager().withPlugin("java-base", _plugin -> {
+            SourceSetContainer sourceSets = project.getExtensions().getByType(SourceSetContainer.class);
+            sourceSets.configureEach(sourceSet -> {
+                configureAllConfigurationsForSourceSet(project, sourceSet);
             });
+        });
+
+        project.getPluginManager().withPlugin("com.palantir.consistent-versions", _plugin -> {
+            // necessary to get g-c-v to write substituted dependencies to the versions.lock file
+            project.getConfigurations().getByName("unifiedClasspath", this::configureConfigurationForSubstitution);
+        });
+    }
+
+    private void configureAllConfigurationsForSourceSet(Project project, SourceSet sourceSet) {
+        // see: https://docs.gradle.org/current/userguide/java_plugin.html#java_source_set_configurations
+        Set<String> configurationsToConfigure = ImmutableSet.of(
+                sourceSet.getCompileClasspathConfigurationName(),
+                sourceSet.getRuntimeClasspathConfigurationName(),
+                sourceSet.getAnnotationProcessorConfigurationName());
+
+        project.getConfigurations().configureEach(configuration -> {
+            if (configurationsToConfigure.contains(configuration.getName())) {
+                configureConfigurationForSubstitution(configuration);
+            }
+        });
+    }
+
+    private void configureConfigurationForSubstitution(Configuration configuration) {
+        configuration.getResolutionStrategy().getDependencySubstitution().all(dep -> {
+            if (dep.getRequested() instanceof ModuleComponentSelector) {
+                ModuleComponentSelector selector = (ModuleComponentSelector) dep.getRequested();
+                VersionMappings.getReplacement(selector)
+                        .ifPresent(replacement -> dep.useTarget(
+                                replacement,
+                                "forced to Java EE 8 dependency because the requested Jakarta "
+                                        + "dependency is < Jakarta EE 9"));
+            }
         });
     }
 }
