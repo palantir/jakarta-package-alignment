@@ -17,17 +17,17 @@ package com.palantir.gradle.jakartapackagealignment;
 
 import org.apache.maven.artifact.versioning.ComparableVersion;
 
-public final class VersionMapping {
+final class VersionMapping {
     private final String jakartaGroupId;
     private final String jakartaArtifactId;
     private final ComparableVersion maxJakartaVersionWithJavaxNamespace;
-    private final String mappedJavaeeCoord;
+    private final MavenCoordinate mappedJavaeeCoord;
 
     VersionMapping(MavenCoordinate jakartaCoord, MavenCoordinate javaeeCoord) {
         this.jakartaGroupId = jakartaCoord.getGroupId();
         this.jakartaArtifactId = jakartaCoord.getArtifactId();
         this.maxJakartaVersionWithJavaxNamespace = new ComparableVersion(jakartaCoord.getVersion());
-        this.mappedJavaeeCoord = javaeeCoord.toString();
+        this.mappedJavaeeCoord = javaeeCoord;
     }
 
     String getJakartaGroupId() {
@@ -42,7 +42,7 @@ public final class VersionMapping {
         return maxJakartaVersionWithJavaxNamespace;
     }
 
-    String getMappedJavaeeCoord() {
+    MavenCoordinate getMappedJavaeeCoord() {
         return mappedJavaeeCoord;
     }
 }

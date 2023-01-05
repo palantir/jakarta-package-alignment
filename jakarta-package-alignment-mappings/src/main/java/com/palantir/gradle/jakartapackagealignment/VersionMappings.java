@@ -175,7 +175,7 @@ public final class VersionMappings {
 
     private VersionMappings() {}
 
-    public static Optional<String> getReplacement(String group, String name, String version) {
+    public static Optional<MavenCoordinate> getReplacement(String group, String name, String version) {
         String key = group + ":" + name;
         VersionMapping mapping = mappings.get(key);
 
