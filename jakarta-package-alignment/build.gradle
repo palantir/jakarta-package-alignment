@@ -4,11 +4,10 @@ apply plugin: 'com.palantir.external-publish-jar'
 apply plugin: 'com.palantir.external-publish-gradle-plugin'
 
 dependencies {
+    implementation project(":jakarta-package-alignment-mappings")
+
     testImplementation gradleTestKit()
     testImplementation 'com.netflix.nebula:nebula-test'
-
-    implementation 'org.apache.maven:maven-artifact'
-    implementation 'com.google.guava:guava'
 }
 
 pluginBundle {

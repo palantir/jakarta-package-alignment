@@ -17,7 +17,7 @@ package com.palantir.gradle.jakartapackagealignment;
 
 import org.apache.maven.artifact.versioning.ComparableVersion;
 
-final class VersionMapping {
+public final class VersionMapping {
     private final String jakartaGroupId;
     private final String jakartaArtifactId;
     private final ComparableVersion maxJakartaVersionWithJavaxNamespace;
