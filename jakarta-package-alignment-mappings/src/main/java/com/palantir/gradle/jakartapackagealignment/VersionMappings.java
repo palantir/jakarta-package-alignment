@@ -16,6 +16,7 @@
 package com.palantir.gradle.jakartapackagealignment;
 
 import com.google.common.collect.ImmutableMap;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import org.apache.maven.artifact.versioning.ComparableVersion;
@@ -181,7 +182,9 @@ public final class VersionMappings {
 
         if (mapping != null) {
             ComparableVersion requestedVersion = new ComparableVersion(version);
-            if (requestedVersion.compareTo(mapping.getMaxJakartaVersionWithJavaxNamespace()) <= 0) {
+            ComparableVersion maxJakartaVersionWithJavaxNamespace =
+                    new ComparableVersion(mapping.getJakartaCoord().getVersion());
+            if (requestedVersion.compareTo(maxJakartaVersionWithJavaxNamespace) <= 0) {
                 return Optional.of(mapping.getMappedJavaeeCoord());
             }
         }
@@ -189,7 +192,7 @@ public final class VersionMappings {
         return Optional.empty();
     }
 
-    public static Map<String, VersionMapping> getMappings() {
-        return mappings;
+    public static Collection<VersionMapping> getMappings() {
+        return mappings.values();
     }
 }

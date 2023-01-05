@@ -15,21 +15,13 @@
  */
 package com.palantir.gradle.jakartapackagealignment;
 
-import org.apache.maven.artifact.versioning.ComparableVersion;
-
 public final class VersionMapping {
-    private final ComparableVersion maxJakartaVersionWithJavaxNamespace;
     private final MavenCoordinate jakartaCoord;
     private final MavenCoordinate mappedJavaeeCoord;
 
     VersionMapping(MavenCoordinate jakartaCoord, MavenCoordinate javaeeCoord) {
-        this.maxJakartaVersionWithJavaxNamespace = new ComparableVersion(jakartaCoord.getVersion());
         this.jakartaCoord = jakartaCoord;
         this.mappedJavaeeCoord = javaeeCoord;
-    }
-
-    ComparableVersion getMaxJakartaVersionWithJavaxNamespace() {
-        return maxJakartaVersionWithJavaxNamespace;
     }
 
     public MavenCoordinate getJakartaCoord() {
