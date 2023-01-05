@@ -30,19 +30,19 @@ public final class VersionMapping {
         this.mappedJavaeeCoord = javaeeCoord.toString();
     }
 
-    public String getJakartaGroupId() {
+    String getJakartaGroupId() {
         return jakartaGroupId;
     }
 
-    public String getJakartaArtifactId() {
+    String getJakartaArtifactId() {
         return jakartaArtifactId;
     }
 
-    public ComparableVersion getMaxJakartaVersionWithJavaxNamespace() {
+    ComparableVersion getMaxJakartaVersionWithJavaxNamespace() {
         return maxJakartaVersionWithJavaxNamespace;
     }
 
-    public String getMappedJavaeeCoord() {
+    String getMappedJavaeeCoord() {
         return mappedJavaeeCoord;
     }
 }
