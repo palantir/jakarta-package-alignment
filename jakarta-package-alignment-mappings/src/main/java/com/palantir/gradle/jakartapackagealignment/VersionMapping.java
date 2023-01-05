@@ -17,32 +17,26 @@ package com.palantir.gradle.jakartapackagealignment;
 
 import org.apache.maven.artifact.versioning.ComparableVersion;
 
-final class VersionMapping {
-    private final String jakartaGroupId;
-    private final String jakartaArtifactId;
+public final class VersionMapping {
     private final ComparableVersion maxJakartaVersionWithJavaxNamespace;
+    private final MavenCoordinate jakartaCoord;
     private final MavenCoordinate mappedJavaeeCoord;
 
     VersionMapping(MavenCoordinate jakartaCoord, MavenCoordinate javaeeCoord) {
-        this.jakartaGroupId = jakartaCoord.getGroupId();
-        this.jakartaArtifactId = jakartaCoord.getArtifactId();
         this.maxJakartaVersionWithJavaxNamespace = new ComparableVersion(jakartaCoord.getVersion());
+        this.jakartaCoord = jakartaCoord;
         this.mappedJavaeeCoord = javaeeCoord;
-    }
-
-    String getJakartaGroupId() {
-        return jakartaGroupId;
-    }
-
-    String getJakartaArtifactId() {
-        return jakartaArtifactId;
     }
 
     ComparableVersion getMaxJakartaVersionWithJavaxNamespace() {
         return maxJakartaVersionWithJavaxNamespace;
     }
 
-    MavenCoordinate getMappedJavaeeCoord() {
+    public MavenCoordinate getJakartaCoord() {
+        return jakartaCoord;
+    }
+
+    public MavenCoordinate getMappedJavaeeCoord() {
         return mappedJavaeeCoord;
     }
 }
