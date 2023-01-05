@@ -16,12 +16,12 @@
 package com.palantir.gradle.jakartapackagealignment;
 
 import com.google.common.collect.ImmutableMap;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import org.apache.maven.artifact.versioning.ComparableVersion;
-import org.gradle.api.artifacts.component.ModuleComponentSelector;
 
-final class VersionMappings {
+public final class VersionMappings {
 
     private static final Map<String, VersionMapping> mappings = ImmutableMap.<String, VersionMapping>builder()
             .put(
@@ -176,17 +176,23 @@ final class VersionMappings {
 
     private VersionMappings() {}
 
-    static Optional<String> getReplacement(ModuleComponentSelector selector) {
-        String key = selector.getGroup() + ":" + selector.getModule();
+    public static Optional<MavenCoordinate> getReplacement(String group, String name, String version) {
+        String key = group + ":" + name;
         VersionMapping mapping = mappings.get(key);
 
         if (mapping != null) {
-            ComparableVersion requestedVersion = new ComparableVersion(selector.getVersion());
-            if (requestedVersion.compareTo(mapping.getMaxJakartaVersionWithJavaxNamespace()) <= 0) {
+            ComparableVersion requestedVersion = new ComparableVersion(version);
+            ComparableVersion maxJakartaVersionWithJavaxNamespace =
+                    new ComparableVersion(mapping.getJakartaCoord().getVersion());
+            if (requestedVersion.compareTo(maxJakartaVersionWithJavaxNamespace) <= 0) {
                 return Optional.of(mapping.getMappedJavaeeCoord());
             }
         }
 
         return Optional.empty();
+    }
+
+    public static Collection<VersionMapping> getMappings() {
+        return mappings.values();
     }
 }

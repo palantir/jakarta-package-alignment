@@ -26,9 +26,9 @@ public class JakartaPackageAlignmentPlugin implements Plugin<Project> {
             configuration.getResolutionStrategy().getDependencySubstitution().all(dep -> {
                 if (dep.getRequested() instanceof ModuleComponentSelector) {
                     ModuleComponentSelector selector = (ModuleComponentSelector) dep.getRequested();
-                    VersionMappings.getReplacement(selector)
+                    VersionMappings.getReplacement(selector.getGroup(), selector.getModule(), selector.getVersion())
                             .ifPresent(replacement -> dep.useTarget(
-                                    replacement,
+                                    replacement.toString(),
                                     "forced to Java EE 8 dependency because the requested Jakarta "
                                             + "dependency is < Jakarta EE 9"));
                 }

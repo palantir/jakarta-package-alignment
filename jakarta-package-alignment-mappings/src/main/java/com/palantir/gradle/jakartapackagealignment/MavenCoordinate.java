@@ -16,7 +16,7 @@
 
 package com.palantir.gradle.jakartapackagealignment;
 
-final class MavenCoordinate {
+public final class MavenCoordinate {
     private final String groupId;
     private final String artifactId;
     private final String version;
@@ -27,15 +27,15 @@ final class MavenCoordinate {
         this.version = version;
     }
 
-    String getGroupId() {
+    public String getGroupId() {
         return groupId;
     }
 
-    String getArtifactId() {
+    public String getArtifactId() {
         return artifactId;
     }
 
-    String getVersion() {
+    public String getVersion() {
         return version;
     }
 

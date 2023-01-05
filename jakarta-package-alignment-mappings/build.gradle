@@ -1,0 +1,8 @@
+apply plugin: "java-library"
+apply plugin: "com.palantir.external-publish-jar"
+
+dependencies {
+    implementation 'org.apache.maven:maven-artifact'
+    implementation 'com.google.guava:guava'
+}
+
