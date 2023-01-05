@@ -1,0 +1,5 @@
+type: improvement
+improvement:
+  description: move VersionMappings stuff to a separate module and make it public
+  links:
+  - https://github.com/palantir/jakarta-package-alignment/pull/13
