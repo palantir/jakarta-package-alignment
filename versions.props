@@ -1,8 +1,8 @@
 com.netflix.nebula:nebula-test = 10.0.0
-org.apache.maven:maven-artifact = 3.8.6
+org.apache.maven:maven-artifact = 3.8.7
 com.google.guava:guava = 31.1-jre
 
 # conflict resolution
 com.google.code.findbugs:jsr305 = 3.0.2
 com.google.errorprone:error_prone_annotations = 2.11.0
-org.checkerframework:checker-qual = 3.28.0
+org.checkerframework:checker-qual = 3.29.0
