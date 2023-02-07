@@ -15,164 +15,15 @@
  */
 package com.palantir.gradle.jakartapackagealignment;
 
-import com.google.common.collect.ImmutableMap;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import org.apache.maven.artifact.versioning.ComparableVersion;
 
 public final class VersionMappings {
 
-    private static final Map<String, VersionMapping> mappings = ImmutableMap.<String, VersionMapping>builder()
-            .put(
-                    "com.sun.activation:jakarta.activation",
-                    new VersionMapping(
-                            new MavenCoordinate("com.sun.activation", "jakarta.activation", "1.2.2"),
-                            new MavenCoordinate("com.sun.activation", "javax.activation", "1.2.0")))
-            .put(
-                    "com.sun.mail:jakarta.mail",
-                    new VersionMapping(
-                            new MavenCoordinate("com.sun.mail", "jakarta.mail", "1.6.7"),
-                            new MavenCoordinate("com.sun.mail", "javax.mail", "1.6.2")))
-            .put(
-                    "jakarta.activation:jakarta.activation-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.activation", "jakarta.activation-api", "1.2.2"),
-                            new MavenCoordinate("javax.activation", "javax.activation-api", "1.2.0")))
-            .put(
-                    "jakarta.annotation:jakarta.annotation-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.annotation", "jakarta.annotation-api", "1.3.5"),
-                            new MavenCoordinate("javax.annotation", "javax.annotation-api", "1.3.2")))
-            .put(
-                    "jakarta.batch:jakarta.batch-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.batch", "jakarta.batch-api", "1.0.2"),
-                            new MavenCoordinate("javax.batch", "javax.batch-api", "1.0.1")))
-            .put(
-                    "jakarta.ejb:jakarta.ejb-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.ejb", "jakarta.ejb-api", "3.2.6"),
-                            new MavenCoordinate("javax.ejb", "javax.ejb-api", "3.2.2")))
-            .put(
-                    "jakarta.el:jakarta.el-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.el", "jakarta.el-api", "3.0.3"),
-                            new MavenCoordinate("javax.el", "javax.el-api", "3.0.0")))
-            .put(
-                    "jakarta.enterprise.concurrent:jakarta.enterprise.concurrent-api",
-                    new VersionMapping(
-                            new MavenCoordinate(
-                                    "jakarta.enterprise.concurrent", "jakarta.enterprise.concurrent-api", "1.1.2"),
-                            new MavenCoordinate(
-                                    "javax.enterprise.concurrent", "javax.enterprise.concurrent-api", "1.1")))
-            .put(
-                    "jakarta.faces:jakarta.faces-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.faces", "jakarta.faces-api", "2.3.2"),
-                            new MavenCoordinate("javax.faces", "javax.faces-api", "2.3")))
-            .put(
-                    "jakarta.inject:jakarta.inject-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.inject", "jakarta.inject-api", "1.0.5"),
-                            new MavenCoordinate("javax.inject", "javax.inject", "1")))
-            .put(
-                    "jakarta.interceptor:jakarta.interceptor-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.interceptor", "jakarta.interceptor-api", "1.2.5"),
-                            new MavenCoordinate("javax.interceptor", "javax.interceptor-api", "1.2.2")))
-            .put(
-                    "jakarta.jms:jakarta.jms-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.jms", "jakarta.jms-api", "2.0.3"),
-                            new MavenCoordinate("javax.jms", "javax.jms-api", "2.0.1")))
-            .put(
-                    "jakarta.json.bind:jakarta.json.bind-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.json.bind", "jakarta.json.bind-api", "1.0.2"),
-                            new MavenCoordinate("javax.json.bind", "javax.json.bind-api", "1.0")))
-            .put(
-                    "jakarta.json:jakarta.json-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.json", "jakarta.json-api", "1.1.6"),
-                            new MavenCoordinate("javax.json", "javax.json-api", "1.1.4")))
-            .put(
-                    "jakarta.jws:jakarta.jws-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.jws", "jakarta.jws-api", "2.1.0"),
-                            new MavenCoordinate("javax.jws", "javax.jws-api", "1.1")))
-            .put(
-                    "jakarta.mail:jakarta.mail-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.mail", "jakarta.mail-api", "1.6.7"),
-                            new MavenCoordinate("javax.mail", "javax.mail-api", "1.6.2")))
-            .put(
-                    "jakarta.persistence:jakarta.persistence-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.persistence", "jakarta.persistence-api", "2.2.3"),
-                            new MavenCoordinate("javax.persistence", "javax.persistence-api", "2.2")))
-            .put(
-                    "jakarta.resource:jakarta.resource-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.resource", "jakarta.resource-api", "1.7.4"),
-                            new MavenCoordinate("javax.resource", "javax.resource-api", "1.7.1")))
-            .put(
-                    "jakarta.security.enterprise:jakarta.security.enterprise-api",
-                    new VersionMapping(
-                            new MavenCoordinate(
-                                    "jakarta.security.enterprise", "jakarta.security.enterprise-api", "1.0.2"),
-                            new MavenCoordinate("javax.security.enterprise", "javax.security.enterprise-api", "1.0")))
-            .put(
-                    "jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.servlet.jsp.jstl", "jakarta.servlet.jsp.jstl-api", "1.2.7"),
-                            new MavenCoordinate("javax.servlet.jsp.jstl", "javax.servlet.jsp.jstl-api", "1.2.2")))
-            .put(
-                    "jakarta.servlet.jsp:jakarta.servlet.jsp-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.servlet.jsp", "jakarta.servlet.jsp-api", "2.3.6"),
-                            new MavenCoordinate("javax.servlet.jsp", "javax.servlet.jsp-api", "2.3.3")))
-            .put(
-                    "jakarta.servlet:jakarta.servlet-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.servlet", "jakarta.servlet-api", "4.0.4"),
-                            new MavenCoordinate("javax.servlet", "javax.servlet-api", "4.0.1")))
-            .put(
-                    "jakarta.transaction:jakarta.transaction-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.transaction", "jakarta.transaction-api", "1.3.3"),
-                            new MavenCoordinate("javax.transaction", "javax.transaction-api", "1.3")))
-            .put(
-                    "jakarta.validation:jakarta.validation-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.validation", "jakarta.validation-api", "2.0.2"),
-                            new MavenCoordinate("javax.validation", "validation-api", "2.0.1.Final")))
-            .put(
-                    "jakarta.websocket:jakarta.websocket-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.websocket", "jakarta.websocket-api", "1.1.2"),
-                            new MavenCoordinate("javax.websocket", "javax.websocket-api", "1.1")))
-            .put(
-                    "jakarta.ws.rs:jakarta.ws.rs-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.ws.rs", "jakarta.ws.rs-api", "2.1.6"),
-                            new MavenCoordinate("javax.ws.rs", "javax.ws.rs-api", "2.1.1")))
-            .put(
-                    "jakarta.xml.bind:jakarta.xml.bind-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.xml.bind", "jakarta.xml.bind-api", "2.3.3"),
-                            new MavenCoordinate("javax.xml.bind", "jaxb-api", "2.3.1")))
-            .put(
-                    "jakarta.xml.soap:jakarta.xml.soap-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.xml.soap", "jakarta.xml.soap-api", "1.4.2"),
-                            new MavenCoordinate("javax.xml.soap", "javax.xml.soap-api", "1.4.0")))
-            .put(
-                    "jakarta.xml.ws:jakarta.xml.ws-api",
-                    new VersionMapping(
-                            new MavenCoordinate("jakarta.xml.ws", "jakarta.xml.ws-api", "2.3.3"),
-                            new MavenCoordinate("javax.xml.ws", "jaxws-api", "2.3.1")))
-            .buildOrThrow();
+    private static final Map<String, VersionMapping> mappings = createMappings();
 
     private VersionMappings() {}
 
@@ -194,5 +45,193 @@ public final class VersionMappings {
 
     public static Collection<VersionMapping> getMappings() {
         return mappings.values();
+    }
+
+    @SuppressWarnings("checkstyle:methodlength")
+    private static Map<String, VersionMapping> createMappings() {
+        Map<String, VersionMapping> allMappings = new HashMap<>();
+        addMapping(
+                allMappings,
+                "com.sun.activation:jakarta.activation",
+                new VersionMapping(
+                        new MavenCoordinate("com.sun.activation", "jakarta.activation", "1.2.2"),
+                        new MavenCoordinate("com.sun.activation", "javax.activation", "1.2.0")));
+        addMapping(
+                allMappings,
+                "com.sun.mail:jakarta.mail",
+                new VersionMapping(
+                        new MavenCoordinate("com.sun.mail", "jakarta.mail", "1.6.7"),
+                        new MavenCoordinate("com.sun.mail", "javax.mail", "1.6.2")));
+        addMapping(
+                allMappings,
+                "jakarta.activation:jakarta.activation-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.activation", "jakarta.activation-api", "1.2.2"),
+                        new MavenCoordinate("javax.activation", "javax.activation-api", "1.2.0")));
+        addMapping(
+                allMappings,
+                "jakarta.annotation:jakarta.annotation-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.annotation", "jakarta.annotation-api", "1.3.5"),
+                        new MavenCoordinate("javax.annotation", "javax.annotation-api", "1.3.2")));
+        addMapping(
+                allMappings,
+                "jakarta.batch:jakarta.batch-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.batch", "jakarta.batch-api", "1.0.2"),
+                        new MavenCoordinate("javax.batch", "javax.batch-api", "1.0.1")));
+        addMapping(
+                allMappings,
+                "jakarta.ejb:jakarta.ejb-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.ejb", "jakarta.ejb-api", "3.2.6"),
+                        new MavenCoordinate("javax.ejb", "javax.ejb-api", "3.2.2")));
+        addMapping(
+                allMappings,
+                "jakarta.el:jakarta.el-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.el", "jakarta.el-api", "3.0.3"),
+                        new MavenCoordinate("javax.el", "javax.el-api", "3.0.0")));
+        addMapping(
+                allMappings,
+                "jakarta.enterprise.concurrent:jakarta.enterprise.concurrent-api",
+                new VersionMapping(
+                        new MavenCoordinate(
+                                "jakarta.enterprise.concurrent", "jakarta.enterprise.concurrent-api", "1.1.2"),
+                        new MavenCoordinate("javax.enterprise.concurrent", "javax.enterprise.concurrent-api", "1.1")));
+        addMapping(
+                allMappings,
+                "jakarta.faces:jakarta.faces-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.faces", "jakarta.faces-api", "2.3.2"),
+                        new MavenCoordinate("javax.faces", "javax.faces-api", "2.3")));
+        addMapping(
+                allMappings,
+                "jakarta.inject:jakarta.inject-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.inject", "jakarta.inject-api", "1.0.5"),
+                        new MavenCoordinate("javax.inject", "javax.inject", "1")));
+        addMapping(
+                allMappings,
+                "jakarta.interceptor:jakarta.interceptor-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.interceptor", "jakarta.interceptor-api", "1.2.5"),
+                        new MavenCoordinate("javax.interceptor", "javax.interceptor-api", "1.2.2")));
+        addMapping(
+                allMappings,
+                "jakarta.jms:jakarta.jms-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.jms", "jakarta.jms-api", "2.0.3"),
+                        new MavenCoordinate("javax.jms", "javax.jms-api", "2.0.1")));
+        addMapping(
+                allMappings,
+                "jakarta.json.bind:jakarta.json.bind-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.json.bind", "jakarta.json.bind-api", "1.0.2"),
+                        new MavenCoordinate("javax.json.bind", "javax.json.bind-api", "1.0")));
+        addMapping(
+                allMappings,
+                "jakarta.json:jakarta.json-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.json", "jakarta.json-api", "1.1.6"),
+                        new MavenCoordinate("javax.json", "javax.json-api", "1.1.4")));
+        addMapping(
+                allMappings,
+                "jakarta.jws:jakarta.jws-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.jws", "jakarta.jws-api", "2.1.0"),
+                        new MavenCoordinate("javax.jws", "javax.jws-api", "1.1")));
+        addMapping(
+                allMappings,
+                "jakarta.mail:jakarta.mail-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.mail", "jakarta.mail-api", "1.6.7"),
+                        new MavenCoordinate("javax.mail", "javax.mail-api", "1.6.2")));
+        addMapping(
+                allMappings,
+                "jakarta.persistence:jakarta.persistence-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.persistence", "jakarta.persistence-api", "2.2.3"),
+                        new MavenCoordinate("javax.persistence", "javax.persistence-api", "2.2")));
+        addMapping(
+                allMappings,
+                "jakarta.resource:jakarta.resource-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.resource", "jakarta.resource-api", "1.7.4"),
+                        new MavenCoordinate("javax.resource", "javax.resource-api", "1.7.1")));
+        addMapping(
+                allMappings,
+                "jakarta.security.enterprise:jakarta.security.enterprise-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.security.enterprise", "jakarta.security.enterprise-api", "1.0.2"),
+                        new MavenCoordinate("javax.security.enterprise", "javax.security.enterprise-api", "1.0")));
+        addMapping(
+                allMappings,
+                "jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.servlet.jsp.jstl", "jakarta.servlet.jsp.jstl-api", "1.2.7"),
+                        new MavenCoordinate("javax.servlet.jsp.jstl", "javax.servlet.jsp.jstl-api", "1.2.2")));
+        addMapping(
+                allMappings,
+                "jakarta.servlet.jsp:jakarta.servlet.jsp-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.servlet.jsp", "jakarta.servlet.jsp-api", "2.3.6"),
+                        new MavenCoordinate("javax.servlet.jsp", "javax.servlet.jsp-api", "2.3.3")));
+        addMapping(
+                allMappings,
+                "jakarta.servlet:jakarta.servlet-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.servlet", "jakarta.servlet-api", "4.0.4"),
+                        new MavenCoordinate("javax.servlet", "javax.servlet-api", "4.0.1")));
+        addMapping(
+                allMappings,
+                "jakarta.transaction:jakarta.transaction-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.transaction", "jakarta.transaction-api", "1.3.3"),
+                        new MavenCoordinate("javax.transaction", "javax.transaction-api", "1.3")));
+        addMapping(
+                allMappings,
+                "jakarta.validation:jakarta.validation-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.validation", "jakarta.validation-api", "2.0.2"),
+                        new MavenCoordinate("javax.validation", "validation-api", "2.0.1.Final")));
+        addMapping(
+                allMappings,
+                "jakarta.websocket:jakarta.websocket-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.websocket", "jakarta.websocket-api", "1.1.2"),
+                        new MavenCoordinate("javax.websocket", "javax.websocket-api", "1.1")));
+        addMapping(
+                allMappings,
+                "jakarta.ws.rs:jakarta.ws.rs-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.ws.rs", "jakarta.ws.rs-api", "2.1.6"),
+                        new MavenCoordinate("javax.ws.rs", "javax.ws.rs-api", "2.1.1")));
+        addMapping(
+                allMappings,
+                "jakarta.xml.bind:jakarta.xml.bind-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.xml.bind", "jakarta.xml.bind-api", "2.3.3"),
+                        new MavenCoordinate("javax.xml.bind", "jaxb-api", "2.3.1")));
+        addMapping(
+                allMappings,
+                "jakarta.xml.soap:jakarta.xml.soap-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.xml.soap", "jakarta.xml.soap-api", "1.4.2"),
+                        new MavenCoordinate("javax.xml.soap", "javax.xml.soap-api", "1.4.0")));
+        addMapping(
+                allMappings,
+                "jakarta.xml.ws:jakarta.xml.ws-api",
+                new VersionMapping(
+                        new MavenCoordinate("jakarta.xml.ws", "jakarta.xml.ws-api", "2.3.3"),
+                        new MavenCoordinate("javax.xml.ws", "jaxws-api", "2.3.1")));
+
+        return allMappings;
+    }
+
+    private static void addMapping(Map<String, VersionMapping> map, String key, VersionMapping value) {
+        if (map.putIfAbsent(key, value) != null) {
+            throw new IllegalArgumentException("duplicate key: " + key);
+        }
     }
 }

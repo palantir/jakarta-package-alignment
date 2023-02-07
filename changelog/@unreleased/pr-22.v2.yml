@@ -1,0 +1,8 @@
+type: improvement
+improvement:
+  description: |-
+    remove guava dependency
+
+    I've come across multiple gradle plugins which publish a fat jar that embeds a version of ImmutableMap from an older version of guava, causing the classloader to load the older version and this code to fail (because it used a method from a newer version).
+  links:
+  - https://github.com/palantir/jakarta-package-alignment/pull/22
