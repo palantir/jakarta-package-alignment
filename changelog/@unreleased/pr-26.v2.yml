@@ -1,0 +1,12 @@
+type: fix
+fix:
+  description: |-
+    fix issue with getReplacement when version is empty string
+
+    It is possible that JakartaPackageAlignmentPlugin will call getReplacement with an empty string for the version. Previously, this code would erroneously return a replacement version because the comparator for ComparableVersion returns -1 when an empty string is compared with the maximum Jakarta version.
+
+    To address that, only look for a replacement when the version is non-null and non-empty.
+
+    Fixes #25
+  links:
+  - https://github.com/palantir/jakarta-package-alignment/pull/26

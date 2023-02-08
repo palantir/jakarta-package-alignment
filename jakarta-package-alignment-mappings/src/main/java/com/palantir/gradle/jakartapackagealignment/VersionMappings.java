@@ -28,6 +28,14 @@ public final class VersionMappings {
     private VersionMappings() {}
 
     public static Optional<MavenCoordinate> getReplacement(String group, String name, String version) {
+        // https://github.com/palantir/jakarta-package-alignment/issues/25
+        // we must have non-null, non-empty version, otherwise the version comparison below
+        // can return the incorrect result
+        // this can happen if getReplacement is called from a ModuleComponentSelector that only has the group/name set
+        if (version == null || version.isEmpty()) {
+            return Optional.empty();
+        }
+
         String key = group + ":" + name;
         VersionMapping mapping = mappings.get(key);
 

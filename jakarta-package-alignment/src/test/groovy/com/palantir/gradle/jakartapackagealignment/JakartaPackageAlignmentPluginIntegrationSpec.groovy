@@ -20,6 +20,7 @@ import groovy.transform.CompileStatic
 import nebula.test.IntegrationSpec
 import nebula.test.dependencies.DependencyGraph
 import nebula.test.dependencies.GradleDependencyGenerator
+import nebula.test.functional.ExecutionResult
 
 /**
  * Integration tests for {@link JakartaPackageAlignmentPlugin}.
@@ -109,5 +110,42 @@ class JakartaPackageAlignmentPluginIntegrationSpec extends IntegrationSpec {
         fileExists("versions.lock")
         versionsLockFile.text.contains("jakarta.servlet:jakarta.servlet-api:5.0.0")
         !versionsLockFile.text.contains("javax.servlet:javax.servlet-api")
+    }
+
+    def "leaves usage of acceptable versions untouched, but still replaces bad versions"() {
+        setup:
+        mavenRepo = generateMavenRepo(
+                "org:direct-dep:1.0.0 -> org:transitive-dep:1.2.3",
+                "org:transitive-dep:1.2.3 -> jakarta.ws.rs:jakarta.ws.rs-api:2.1.6",
+                "org:direct-dep:2.0.0 -> org:transitive-dep:2.0.0",
+                "org:transitive-dep:2.0.0 -> jakarta.servlet:jakarta.servlet-api:5.0.0",
+                "jakarta.ws.rs:jakarta.ws.rs-api:3.1.0",
+                "jakarta.ws.rs:jakarta.ws.rs-api:2.1.6",
+                "javax.ws.rs:javax.ws.rs-api:2.1.1"
+        )
+
+        buildFile << """
+            dependencies {
+                implementation "org:direct-dep"
+                implementation "jakarta.ws.rs:jakarta.ws.rs-api"
+            }
+        """.stripIndent()
+
+        // no idea why stripIndent isnt working here, maybe the encoding on this file is weird?
+        versionsProps << """org:direct-dep = 1.0.0\njakarta.ws.rs:jakarta.ws.rs-api = 3.1.0""".stripIndent()
+
+        when:
+        runTasksSuccessfully("--write-locks")
+        ExecutionResult result = runTasksSuccessfully("dependencies", "--configuration", "runtimeClasspath")
+
+        then:
+        def versionsLockFile = new File(projectDir, "versions.lock")
+        fileExists("versions.lock")
+        versionsLockFile.text.contains("jakarta.ws.rs:jakarta.ws.rs-api:3.1.0")
+        versionsLockFile.text.contains("javax.ws.rs:javax.ws.rs-api:2.1.1")
+        !versionsLockFile.text.contains("jakarta.ws.rs:jakarta.ws.rs-api:2.1.6")
+
+        result.standardOutput.contains("jakarta.ws.rs:jakarta.ws.rs-api -> 3.1.0")
+        result.standardOutput.contains("jakarta.ws.rs:jakarta.ws.rs-api:2.1.6 -> javax.ws.rs:javax.ws.rs-api:2.1.1")
     }
 }
