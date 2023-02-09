@@ -3,5 +3,7 @@ apply plugin: "com.palantir.external-publish-jar"
 
 dependencies {
     implementation 'org.apache.maven:maven-artifact'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
