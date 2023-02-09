@@ -1,0 +1,5 @@
+type: fix
+fix:
+  description: protect against other types of erroneous versions
+  links:
+  - https://github.com/palantir/jakarta-package-alignment/pull/28

@@ -24,18 +24,11 @@ import org.apache.maven.artifact.versioning.ComparableVersion;
 public final class VersionMappings {
 
     private static final Map<String, VersionMapping> mappings = createMappings();
+    private static final ComparableVersion MINIMUM_VERSION_BOUND = new ComparableVersion("0.0.1");
 
     private VersionMappings() {}
 
     public static Optional<MavenCoordinate> getReplacement(String group, String name, String version) {
-        // https://github.com/palantir/jakarta-package-alignment/issues/25
-        // we must have non-null, non-empty version, otherwise the version comparison below
-        // can return the incorrect result
-        // this can happen if getReplacement is called from a ModuleComponentSelector that only has the group/name set
-        if (version == null || version.isEmpty()) {
-            return Optional.empty();
-        }
-
         String key = group + ":" + name;
         VersionMapping mapping = mappings.get(key);
 
@@ -43,7 +36,15 @@ public final class VersionMappings {
             ComparableVersion requestedVersion = new ComparableVersion(version);
             ComparableVersion maxJakartaVersionWithJavaxNamespace =
                     new ComparableVersion(mapping.getJakartaCoord().getVersion());
-            if (requestedVersion.compareTo(maxJakartaVersionWithJavaxNamespace) <= 0) {
+
+            // https://github.com/palantir/jakarta-package-alignment/issues/25
+            // In some cases, getReplacement may be called with a weird version like "." or an empty string
+            // ComparableVersion behaves a bit strangely in these cases, so to ensure we're checking a valid
+            // version range, also compare it with an arbitrary minimum bound which we know does not exist
+            // for any jakarta package. This ensures that we don't accidentally return an incorrect replacement
+            // rule in these cases which can hose up dependency resolution.
+            if (requestedVersion.compareTo(MINIMUM_VERSION_BOUND) > 0
+                    && requestedVersion.compareTo(maxJakartaVersionWithJavaxNamespace) <= 0) {
                 return Optional.of(mapping.getMappedJavaeeCoord());
             }
         }
