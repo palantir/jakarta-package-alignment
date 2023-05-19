@@ -16,7 +16,7 @@
 
 package com.palantir.gradle.jakartapackagealignment;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -25,9 +25,9 @@ class VersionMappingsTest {
     @Test
     public void testBogusVersions() {
         Optional<MavenCoordinate> result = VersionMappings.getReplacement("jakarta.ws.rs", "jakarta.ws.rs-api", "");
-        assertTrue(result.isEmpty());
+        assertThat(result.isEmpty()).isTrue();
 
         result = VersionMappings.getReplacement("jakarta.ws.rs", "jakarta.ws.rs-api", ".");
-        assertTrue(result.isEmpty());
+        assertThat(result.isEmpty()).isTrue();
     }
 }
