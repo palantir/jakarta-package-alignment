@@ -58,7 +58,9 @@ to check if a project requests a Jakarta EE dependency with a version
 less than or equal to the maximum "bad" version; if it encounters one,
 it replaces it with the mapped Java EE library version instead.
 
-## Caveats with [gradle-consistent-versions](https://github.com/palantir/gradle-consistent-versions)
+## Caveats 
+
+### Caveats with [gradle-consistent-versions](https://github.com/palantir/gradle-consistent-versions)
 
 This plugin works with the gradle-consistent-versions plugin, but
 currently only correctly replaces transitive Jakarta dependencies
@@ -84,6 +86,16 @@ an explicit dependency on the corresponding Java EE library instead
 (e.g. use `javax.servlet:javax.servlet-api`); or (b) use a newer
 version of the Jakarta EE dependency with the updated `jakarta`
 namespace.
+
+### Note about Glassfish repackaged OSGi bundles
+
+Glassfish ships some jars that are a repackaging of some Jakarta EE/Java EE components
+as an OSGi bundle. Because this can sometimes cause lead to conflicting
+names on the classpath, this plugin also replaces some of these Glassfish jars
+with their (non-OSGi) Java EE equivalents.
+
+If you use this plugin and your project explicitly needs the Glassfish OSGi
+bundle jar as well, please [file a Github issue](https://github.com/palantir/jakarta-package-alignment/issues).
 
 ## License
 
