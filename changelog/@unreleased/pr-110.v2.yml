@@ -1,0 +1,5 @@
+type: improvement
+improvement:
+  description: replace some glassfish osgi bundles with java ee equivalents
+  links:
+  - https://github.com/palantir/jakarta-package-alignment/pull/110

@@ -235,6 +235,22 @@ public final class VersionMappings {
                         new MavenCoordinate("jakarta.xml.ws", "jakarta.xml.ws-api", "2.3.3"),
                         new MavenCoordinate("javax.xml.ws", "jaxws-api", "2.3.1")));
 
+        // glassfish hk2 repackages some components as an OSGi bundle
+        // we assume no OSGi usage in conjunction with this plugin, keeping the hk2 dependency
+        // around could lead to conflicting class names on the classpath
+        addMapping(
+                allMappings,
+                "org.glassfish.hk2.external:jakarta.inject",
+                new VersionMapping(
+                        new MavenCoordinate("org.glassfish.hk2.external", "jakarta.inject", "2.6.1"),
+                        new MavenCoordinate("javax.inject", "javax.inject", "1")));
+        addMapping(
+                allMappings,
+                "org.glassfish.hk2.external:javax.inject",
+                new VersionMapping(
+                        new MavenCoordinate("org.glassfish.hk2.external", "javax.inject", "2.4.0"),
+                        new MavenCoordinate("javax.inject", "javax.inject", "1")));
+
         return allMappings;
     }
 
