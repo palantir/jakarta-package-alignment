@@ -1,4 +1,4 @@
-# Run ./gradlew --write-locks to regenerate this file
+# Run ./gradlew writeVersionsLock to regenerate this file
 org.apache.commons:commons-lang3:3.12.0 (1 constraints: b70d1e3d)
 org.apache.maven:maven-artifact:3.9.6 (1 constraints: 14051b36)
 org.codehaus.plexus:plexus-utils:3.5.1 (1 constraints: 8a0d6e2f)
