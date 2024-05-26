@@ -1,6 +1,6 @@
 com.netflix.nebula:nebula-test = 10.0.0
 org.apache.maven:maven-artifact = 3.9.7
-org.assertj:assertj-core = 3.25.3
+org.assertj:assertj-core = 3.26.0
 org.junit.jupiter:* = 5.10.2
 
 # conflict resolution
