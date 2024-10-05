@@ -10,19 +10,17 @@ dependencies {
     testImplementation 'com.netflix.nebula:nebula-test'
 }
 
-pluginBundle {
+gradlePlugin {
     website = 'https://github.com/palantir/jakarta-package-alignment'
     vcsUrl = 'https://github.com/palantir/jakarta-package-alignment'
-    description = "Ensure Jakarta EE dependencies are at versions with the 'jakarta' namespace, or force them back to Java EE dependencies with the 'javax' namespace"
-    tags = ['versions']
-}
 
-gradlePlugin {
     plugins {
         jakartaPackageAlignmentPlugin {
             id = 'com.palantir.jakarta-package-alignment'
             implementationClass = 'com.palantir.gradle.jakartapackagealignment.JakartaPackageAlignmentPlugin'
             displayName = 'Jakarta Package Alignment Plugin'
+            description = "Ensure Jakarta EE dependencies are at versions with the 'jakarta' namespace, or force them back to Java EE dependencies with the 'javax' namespace"
+            tags.set(['versions'])
         }
     }
 }
