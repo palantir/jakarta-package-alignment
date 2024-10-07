@@ -40,6 +40,8 @@ class JakartaPackageAlignmentPluginIntegrationSpec extends IntegrationSpec {
     }
 
     void setup() {
+        System.setProperty('ignoreDeprecations', 'true')
+
         // TODO: this could potentially be replaced by something that calls VersionMappings.getReplacement
         // at runtime to keep the jakarta and javax versions consistent, but we'd still need to hardcode versions
         // somewhere in this test code anyway...
@@ -59,7 +61,7 @@ class JakartaPackageAlignmentPluginIntegrationSpec extends IntegrationSpec {
                     mavenCentral()
                 }
                 dependencies {
-                    classpath 'com.palantir.gradle.consistentversions:gradle-consistent-versions:2.11.0'
+                    classpath 'com.palantir.gradle.consistentversions:gradle-consistent-versions:2.25.0'
                 }
             }
             apply plugin: "com.palantir.consistent-versions"
