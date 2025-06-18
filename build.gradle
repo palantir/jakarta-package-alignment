@@ -48,7 +48,7 @@ allprojects {
     apply plugin: 'org.inferred.processors'
     apply plugin: 'com.palantir.jakarta-package-alignment'
 
-    group 'com.palantir.jakartapackagealignment'
+    group 'com.palantir.portaltest.jakartapackagealignment'
     version System.env.CIRCLE_TAG ?: rootProject.version
 }
 
