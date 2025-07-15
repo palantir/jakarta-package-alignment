@@ -1,5 +1,5 @@
 # Run ./gradlew writeVersionsLocks to regenerate this file
-org.apache.maven:maven-artifact:3.9.10 (1 constraints: 3f05553b)
+org.apache.maven:maven-artifact:3.9.11 (1 constraints: 4005563b)
 org.codehaus.plexus:plexus-utils:3.6.0 (1 constraints: 8a0d702f)
 
 [Test dependencies]
