@@ -19,6 +19,7 @@ package com.palantir.gradle.jakartapackagealignment
 import groovy.transform.CompileStatic
 import nebula.test.IntegrationSpec
 import nebula.test.dependencies.DependencyGraph
+import nebula.test.dependencies.DependencyGraphNode
 import nebula.test.dependencies.GradleDependencyGenerator
 import nebula.test.functional.ExecutionResult
 
@@ -34,6 +35,13 @@ class JakartaPackageAlignmentPluginIntegrationSpec extends IntegrationSpec {
     // borrowed from gcv
     protected File generateMavenRepo(String... graph) {
         DependencyGraph dependencyGraph = new DependencyGraph(graph)
+        dependencyGraph.nodes = dependencyGraph.nodes.collect { dependencyGraphNode ->
+            new DependencyGraphNode(
+                    dependencyGraphNode.coordinate,
+                    dependencyGraphNode.dependencies,
+                    dependencyGraphNode.status,
+                    17)
+        }
         GradleDependencyGenerator generator = new GradleDependencyGenerator(
                 dependencyGraph, new File(projectDir, "build/testrepogen").toString())
         return generator.generateTestMavenRepo()
@@ -61,7 +69,7 @@ class JakartaPackageAlignmentPluginIntegrationSpec extends IntegrationSpec {
                     mavenCentral()
                 }
                 dependencies {
-                    classpath 'com.palantir.gradle.consistentversions:gradle-consistent-versions:2.25.0'
+                    classpath 'com.palantir.gradle.consistentversions:gradle-consistent-versions:3.18.0'
                 }
             }
             apply plugin: "com.palantir.consistent-versions"
